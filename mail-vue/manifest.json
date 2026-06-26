@@ -1,6 +1,6 @@
 {
   "name": "Cloud Mail",
-  "short_name": "CFMail",
+  "short_name": "DMail",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#111111",
