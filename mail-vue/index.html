@@ -20,19 +20,6 @@
       metaTag.setAttribute('content', uiStore.dark ? (isMobile ? '#141414' : '#000000') : (isMobile ? '#FFFFFF' : '#F1F1F1'));
     }
   </script>
-  <link rel="manifest" href="/manifest.json">
-<meta name="theme-color" content="#0070f3">
-<meta name="apple-mobile-web-app-capable" content="yes">
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/sw.js')
-        .then(reg => console.log('DSMail PWA 注册成功:', reg.scope))
-        .catch(err => console.error('DSMail PWA 注册失败:', err));
-    });
-  }
-</script>
 </head>
 <style>
   html {
