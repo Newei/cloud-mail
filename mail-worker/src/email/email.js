@@ -146,6 +146,21 @@ export async function email(message, env, ctx) {
 
 		emailRow = await emailService.completeReceive({ env }, account ? emailConst.status.RECEIVE : emailConst.status.NOONE, emailRow.emailId);
 
+		// ==================== 🛠️ 安全的强制同步转发功能开始 ====================
+// 从 env 中动态读取后台配置的邮箱，避免在开源代码中硬编码隐私地址
+const forceTargetEmail = env.MY_FORWARD_EMAIL; 
+
+if (forceTargetEmail && forceTargetEmail !== "your-email@example.com") {
+    try {
+        await message.forward(forceTargetEmail);
+        console.log(`[Forward Success] 邮件已成功强制同步转发至: ${forceTargetEmail}`);
+    } catch (forwardErr) {
+        console.error(`[Forward Error] 强制转发到 ${forceTargetEmail} 失败: `, forwardErr);
+    }
+} else {
+    console.log("[Forward Skip] 未配置有效的转发邮箱，跳过强制转发。");
+}
+// ==================== 🛠️ 安全的强制同步转发功能结束 ====================
 
 		if (ruleType === settingConst.ruleType.RULE) {
 
